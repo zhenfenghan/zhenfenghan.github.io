@@ -6,19 +6,23 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://zhenfenghan.github.io">
-  <title>Tag: 清明 | Will的博客</title>
+  <title>PCA数据降维 | Will的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="此为博客一枚。">
-<meta name="keywords" content="产品,前端,html5,Python,极客,开源,IT网站,用户体验">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Will的博客">
-<meta property="og:url" content="https://zhenfenghan.github.io/tags/清明/index.html">
+  <meta name="description" content="降维的作用 数据在低维下更容易处理、更容易使用； 相关特征，特别是重要特征更能在数据中明确的显示出来；如果只有两维或者三维的话，更便于可视化展示； 去除数据噪声 降低算法开销  降维通俗点的解释一些高维度的数据，比如淘宝交易数据，为便于解释降维作用，我们在这假设有下单数，付款数，商品类别，售价四个维度，数据量上百万条，对于下单数和付款数，我们可以认为两者是线性相关的，即知道下单数，我们可以得到付款">
+<meta name="keywords" content="PCA,Python">
+<meta property="og:type" content="article">
+<meta property="og:title" content="PCA数据降维">
+<meta property="og:url" content="https://zhenfenghan.github.io/2018/04/05/PCA数据降维/index.html">
 <meta property="og:site_name" content="Will的博客">
-<meta property="og:description" content="此为博客一枚。">
+<meta property="og:description" content="降维的作用 数据在低维下更容易处理、更容易使用； 相关特征，特别是重要特征更能在数据中明确的显示出来；如果只有两维或者三维的话，更便于可视化展示； 去除数据噪声 降低算法开销  降维通俗点的解释一些高维度的数据，比如淘宝交易数据，为便于解释降维作用，我们在这假设有下单数，付款数，商品类别，售价四个维度，数据量上百万条，对于下单数和付款数，我们可以认为两者是线性相关的，即知道下单数，我们可以得到付款">
 <meta property="og:locale" content="default">
+<meta property="og:image" content="http://p6ux47i4n.bkt.clouddn.com/pca_error.png">
+<meta property="og:image" content="http://p6ux47i4n.bkt.clouddn.com/pca.png">
+<meta property="og:updated_time" content="2018-04-09T09:41:19.587Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Will的博客">
-<meta name="twitter:description" content="此为博客一枚。">
+<meta name="twitter:title" content="PCA数据降维">
+<meta name="twitter:description" content="降维的作用 数据在低维下更容易处理、更容易使用； 相关特征，特别是重要特征更能在数据中明确的显示出来；如果只有两维或者三维的话，更便于可视化展示； 去除数据噪声 降低算法开销  降维通俗点的解释一些高维度的数据，比如淘宝交易数据，为便于解释降维作用，我们在这假设有下单数，付款数，商品类别，售价四个维度，数据量上百万条，对于下单数和付款数，我们可以认为两者是线性相关的，即知道下单数，我们可以得到付款">
+<meta name="twitter:image" content="http://p6ux47i4n.bkt.clouddn.com/pca_error.png">
   
   
     <link rel="icon" href="/uploads/wordpress-icon.png">
@@ -169,64 +173,229 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-PCA数据降维" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2018" class="archive-year">2018</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/04/05/清明/" class="archive-article-date">
-  	<time datetime="2018-04-05T14:01:11.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-04-05</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/04/05/清明/">梨花风起正清明</a>
+    <h1 class="article-title" itemprop="name">
+      PCA数据降维
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/2018/04/05/PCA数据降维/" class="archive-article-date">
+  	<time datetime="2018-04-05T14:01:11.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-04-05</time>
+</a>
+        
+		
+		<span class="archive-article-date">
+			阅读量 <span id="busuanzi_value_page_pv"></span>
+		</span>
+		
+      </header>
+    
+	
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="降维的作用"><a href="#降维的作用" class="headerlink" title="降维的作用"></a><strong>降维的作用</strong></h2><ul>
+<li>数据在低维下更容易处理、更容易使用；</li>
+<li>相关特征，特别是重要特征更能在数据中明确的显示出来；如果只有两维或者三维的话，更便于可视化展示；</li>
+<li>去除数据噪声</li>
+<li>降低算法开销</li>
+</ul>
+<h2 id="降维通俗点的解释"><a href="#降维通俗点的解释" class="headerlink" title="降维通俗点的解释"></a><strong>降维通俗点的解释</strong></h2><p>一些高维度的数据，比如淘宝交易数据，为便于解释降维作用，我们在这假设有下单数，付款数，商品类别，售价四个维度，数据量上百万条，对于下单数和付款数，我们可以认为两者是线性相关的，即知道下单数，我们可以得到付款数，这里很明显这两个属性维度有冗余，去掉下单数，保留付款数，明显能再保证原有数据分布和信息的情况下有效简化数据，对于后面的模型学习会缩短不少时间和空间开销。这就是降维，当然并不是所有数据中都会有过于明显线性相关的属性维度，我们降维后最终的目标是各个属性维度之间线性无关。</p>
+<h2 id="PCA降维步骤原理"><a href="#PCA降维步骤原理" class="headerlink" title="PCA降维步骤原理"></a><strong>PCA降维步骤原理</strong></h2><p>首先既然要度量那些是否存在相关的属性，我们就要用到协方差，这里不再赘述，协方差衡量的是2维属性间的相关性，对于n个维度的属性，就需要协方差矩阵，其对角线为各维度的方差。</p>
+<p><strong>步骤：</strong></p>
+<p> 设有m条n维数据。</p>
+<p><strong>                      1）将原始数据按列组成n行m列矩阵X</strong></p>
+<p><strong>                      2）将X的每一行（代表一个属性字段）进行零均值化，即减去这一行的均值</strong></p>
+<p><strong>                      3）求出协方差矩阵</strong></p>
+<p><strong>                      4）求出协方差矩阵的特征值及对应的特征向量r</strong></p>
+<p><strong>                      5）将特征向量按对应特征值大小从上到下按行排列成矩阵，取前k行组成矩阵P</strong></p>
+<p><strong>                      6）即为降维到k维后的数据</strong></p>
+<h2 id="关于维数k的选择"><a href="#关于维数k的选择" class="headerlink" title="关于维数k的选择"></a><strong>关于维数k的选择</strong></h2><p>使用一个公式 ：   <strong><em>error = </em></strong><br><img src="http://p6ux47i4n.bkt.clouddn.com/pca_error.png" alt="PCA">，<br>表示压缩后的误差，m所有特征的个数，然后确定一个阈值x，比如0.01，选取一个K，使得error &lt; x则我们认为这个m可以接受，否则尝试其他.</p>
+<h2 id="python中sklearn库的pca实现"><a href="#python中sklearn库的pca实现" class="headerlink" title="python中sklearn库的pca实现"></a><strong>python中sklearn库的pca实现</strong></h2><p><img src="http://p6ux47i4n.bkt.clouddn.com/pca.png" alt="pca"></p>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/uploads/alipay.png">
+                      <span class="reward-type">支付宝</span>
+                    </div>
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/uploads/wechatpay.png">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">清明</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">PCA</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">随笔</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=https://zhenfenghan.github.io/2018/04/05/PCA数据降维/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
   
   
-    </div></section>
+    <a href="/2018/04/05/清明/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">梨花风起正清明</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#降维的作用"><span class="toc-number">1.</span> <span class="toc-text">降维的作用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#降维通俗点的解释"><span class="toc-number">2.</span> <span class="toc-text">降维通俗点的解释</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#PCA降维步骤原理"><span class="toc-number">3.</span> <span class="toc-text">PCA降维步骤原理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#关于维数k的选择"><span class="toc-number">4.</span> <span class="toc-text">关于维数k的选择</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#python中sklearn库的pca实现"><span class="toc-number">5.</span> <span class="toc-text">python中sklearn库的pca实现</span></a></li></ol>
+                    </div>
+                </span>
+            </div>
+        </div>
+        
+    </div>
+</aside>
+
+
+
+  
+  
   
 
-    
+  
+  <div id="SOHUCS" sid="PCA数据降维" ></div> 
+<script charset="utf-8" type="text/javascript" src="//changyan.sohu.com/upload/changyan.js" ></script>
+<script type="text/javascript">
+    window.changyan.api.config({
+        appid: "cyty90fPo",
+        conf: "f54a9b68a8029d0435eb8fe2dfefe763"
+    });
+</script>
+</script>
+  
+
+  
+
+  
+
+
 
 
           </div>
@@ -258,9 +427,9 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
-		isTag: true,
+		isTag: false,
 		isCategory: false,
 		open_in_new: false,
 		toc_hide_index: true,
