@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://zhenfenghan.github.io/"/>
-  <updated>2018-04-09T09:41:19.587Z</updated>
+  <updated>2018-04-09T09:43:59.688Z</updated>
   <id>https://zhenfenghan.github.io/</id>
   
   <author>
@@ -21,18 +21,18 @@
     <link href="https://zhenfenghan.github.io/2018/04/05/PCA%E6%95%B0%E6%8D%AE%E9%99%8D%E7%BB%B4/"/>
     <id>https://zhenfenghan.github.io/2018/04/05/PCA数据降维/</id>
     <published>2018-04-05T14:01:11.000Z</published>
-    <updated>2018-04-09T09:41:19.587Z</updated>
+    <updated>2018-04-09T09:43:59.688Z</updated>
     
-    <content type="html"><![CDATA[<h2 id="降维的作用"><a href="#降维的作用" class="headerlink" title="降维的作用"></a><strong>降维的作用</strong></h2><ul><li>数据在低维下更容易处理、更容易使用；</li><li>相关特征，特别是重要特征更能在数据中明确的显示出来；如果只有两维或者三维的话，更便于可视化展示；</li><li>去除数据噪声</li><li>降低算法开销</li></ul><h2 id="降维通俗点的解释"><a href="#降维通俗点的解释" class="headerlink" title="降维通俗点的解释"></a><strong>降维通俗点的解释</strong></h2><p>一些高维度的数据，比如淘宝交易数据，为便于解释降维作用，我们在这假设有下单数，付款数，商品类别，售价四个维度，数据量上百万条，对于下单数和付款数，我们可以认为两者是线性相关的，即知道下单数，我们可以得到付款数，这里很明显这两个属性维度有冗余，去掉下单数，保留付款数，明显能再保证原有数据分布和信息的情况下有效简化数据，对于后面的模型学习会缩短不少时间和空间开销。这就是降维，当然并不是所有数据中都会有过于明显线性相关的属性维度，我们降维后最终的目标是各个属性维度之间线性无关。</p><h2 id="PCA降维步骤原理"><a href="#PCA降维步骤原理" class="headerlink" title="PCA降维步骤原理"></a><strong>PCA降维步骤原理</strong></h2><p>首先既然要度量那些是否存在相关的属性，我们就要用到协方差，这里不再赘述，协方差衡量的是2维属性间的相关性，对于n个维度的属性，就需要协方差矩阵，其对角线为各维度的方差。</p><p><strong>步骤：</strong></p><p> 设有m条n维数据。</p><p><strong>                      1）将原始数据按列组成n行m列矩阵X</strong></p><p><strong>                      2）将X的每一行（代表一个属性字段）进行零均值化，即减去这一行的均值</strong></p><p><strong>                      3）求出协方差矩阵</strong></p><p><strong>                      4）求出协方差矩阵的特征值及对应的特征向量r</strong></p><p><strong>                      5）将特征向量按对应特征值大小从上到下按行排列成矩阵，取前k行组成矩阵P</strong></p><p><strong>                      6）即为降维到k维后的数据</strong></p><h2 id="关于维数k的选择"><a href="#关于维数k的选择" class="headerlink" title="关于维数k的选择"></a><strong>关于维数k的选择</strong></h2><p>使用一个公式 ：   <strong><em>error = </em></strong><br><img src="http://p6ux47i4n.bkt.clouddn.com/pca_error.png" alt="PCA">，<br>表示压缩后的误差，m所有特征的个数，然后确定一个阈值x，比如0.01，选取一个K，使得error &lt; x则我们认为这个m可以接受，否则尝试其他.</p><h2 id="python中sklearn库的pca实现"><a href="#python中sklearn库的pca实现" class="headerlink" title="python中sklearn库的pca实现"></a><strong>python中sklearn库的pca实现</strong></h2><p><img src="http://p6ux47i4n.bkt.clouddn.com/pca.png" alt="pca"></p>]]></content>
+    <content type="html"><![CDATA[<h2 id="降维的作用"><a href="#降维的作用" class="headerlink" title="降维的作用"></a><strong>降维的作用</strong></h2><ul><li>数据在低维下更容易处理、更容易使用；</li><li>相关特征，特别是重要特征更能在数据中明确的显示出来；如果只有两维或者三维的话，更便于可视化展示；</li><li>去除数据噪声</li><li>降低算法开销</li></ul><a id="more"></a><h2 id="降维通俗点的解释"><a href="#降维通俗点的解释" class="headerlink" title="降维通俗点的解释"></a><strong>降维通俗点的解释</strong></h2><p>一些高维度的数据，比如淘宝交易数据，为便于解释降维作用，我们在这假设有下单数，付款数，商品类别，售价四个维度，数据量上百万条，对于下单数和付款数，我们可以认为两者是线性相关的，即知道下单数，我们可以得到付款数，这里很明显这两个属性维度有冗余，去掉下单数，保留付款数，明显能再保证原有数据分布和信息的情况下有效简化数据，对于后面的模型学习会缩短不少时间和空间开销。这就是降维，当然并不是所有数据中都会有过于明显线性相关的属性维度，我们降维后最终的目标是各个属性维度之间线性无关。</p><h2 id="PCA降维步骤原理"><a href="#PCA降维步骤原理" class="headerlink" title="PCA降维步骤原理"></a><strong>PCA降维步骤原理</strong></h2><p>首先既然要度量那些是否存在相关的属性，我们就要用到协方差，这里不再赘述，协方差衡量的是2维属性间的相关性，对于n个维度的属性，就需要协方差矩阵，其对角线为各维度的方差。</p><p><strong>步骤：</strong></p><p> 设有m条n维数据。</p><p><strong>                      1）将原始数据按列组成n行m列矩阵X</strong></p><p><strong>                      2）将X的每一行（代表一个属性字段）进行零均值化，即减去这一行的均值</strong></p><p><strong>                      3）求出协方差矩阵</strong></p><p><strong>                      4）求出协方差矩阵的特征值及对应的特征向量r</strong></p><p><strong>                      5）将特征向量按对应特征值大小从上到下按行排列成矩阵，取前k行组成矩阵P</strong></p><p><strong>                      6）即为降维到k维后的数据</strong></p><h2 id="关于维数k的选择"><a href="#关于维数k的选择" class="headerlink" title="关于维数k的选择"></a><strong>关于维数k的选择</strong></h2><p>使用一个公式 ：   <strong><em>error = </em></strong><br><img src="http://p6ux47i4n.bkt.clouddn.com/pca_error.png" alt="PCA">，<br>表示压缩后的误差，m所有特征的个数，然后确定一个阈值x，比如0.01，选取一个K，使得error &lt; x则我们认为这个m可以接受，否则尝试其他.</p><h2 id="python中sklearn库的pca实现"><a href="#python中sklearn库的pca实现" class="headerlink" title="python中sklearn库的pca实现"></a><strong>python中sklearn库的pca实现</strong></h2><p><img src="http://p6ux47i4n.bkt.clouddn.com/pca.png" alt="pca"></p>]]></content>
     
     <summary type="html">
     
-      
-      
-        &lt;h2 id=&quot;降维的作用&quot;&gt;&lt;a href=&quot;#降维的作用&quot; class=&quot;headerlink&quot; title=&quot;降维的作用&quot;&gt;&lt;/a&gt;&lt;strong&gt;降维的作用&lt;/strong&gt;&lt;/h2&gt;&lt;ul&gt;
+      &lt;h2 id=&quot;降维的作用&quot;&gt;&lt;a href=&quot;#降维的作用&quot; class=&quot;headerlink&quot; title=&quot;降维的作用&quot;&gt;&lt;/a&gt;&lt;strong&gt;降维的作用&lt;/strong&gt;&lt;/h2&gt;&lt;ul&gt;
 &lt;li&gt;数据在低维下更容易处理、更容易使用；&lt;/li&gt;
-&lt;li&gt;相关特征，特别
-      
+&lt;li&gt;相关特征，特别是重要特征更能在数据中明确的显示出来；如果只有两维或者三维的话，更便于可视化展示；&lt;/li&gt;
+&lt;li&gt;去除数据噪声&lt;/li&gt;
+&lt;li&gt;降低算法开销&lt;/li&gt;
+&lt;/ul&gt;
     
     </summary>
     

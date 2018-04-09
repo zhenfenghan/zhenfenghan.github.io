@@ -199,19 +199,9 @@
 <li>去除数据噪声</li>
 <li>降低算法开销</li>
 </ul>
-<h2 id="降维通俗点的解释"><a href="#降维通俗点的解释" class="headerlink" title="降维通俗点的解释"></a><strong>降维通俗点的解释</strong></h2><p>一些高维度的数据，比如淘宝交易数据，为便于解释降维作用，我们在这假设有下单数，付款数，商品类别，售价四个维度，数据量上百万条，对于下单数和付款数，我们可以认为两者是线性相关的，即知道下单数，我们可以得到付款数，这里很明显这两个属性维度有冗余，去掉下单数，保留付款数，明显能再保证原有数据分布和信息的情况下有效简化数据，对于后面的模型学习会缩短不少时间和空间开销。这就是降维，当然并不是所有数据中都会有过于明显线性相关的属性维度，我们降维后最终的目标是各个属性维度之间线性无关。</p>
-<h2 id="PCA降维步骤原理"><a href="#PCA降维步骤原理" class="headerlink" title="PCA降维步骤原理"></a><strong>PCA降维步骤原理</strong></h2><p>首先既然要度量那些是否存在相关的属性，我们就要用到协方差，这里不再赘述，协方差衡量的是2维属性间的相关性，对于n个维度的属性，就需要协方差矩阵，其对角线为各维度的方差。</p>
-<p><strong>步骤：</strong></p>
-<p> 设有m条n维数据。</p>
-<p><strong>                      1）将原始数据按列组成n行m列矩阵X</strong></p>
-<p><strong>                      2）将X的每一行（代表一个属性字段）进行零均值化，即减去这一行的均值</strong></p>
-<p><strong>                      3）求出协方差矩阵</strong></p>
-<p><strong>                      4）求出协方差矩阵的特征值及对应的特征向量r</strong></p>
-<p><strong>                      5）将特征向量按对应特征值大小从上到下按行排列成矩阵，取前k行组成矩阵P</strong></p>
-<p><strong>                      6）即为降维到k维后的数据</strong></p>
-<h2 id="关于维数k的选择"><a href="#关于维数k的选择" class="headerlink" title="关于维数k的选择"></a><strong>关于维数k的选择</strong></h2><p>使用一个公式 ：   <strong><em>error = </em></strong><br><img src="http://p6ux47i4n.bkt.clouddn.com/pca_error.png" alt="PCA">，<br>表示压缩后的误差，m所有特征的个数，然后确定一个阈值x，比如0.01，选取一个K，使得error &lt; x则我们认为这个m可以接受，否则尝试其他.</p>
-<h2 id="python中sklearn库的pca实现"><a href="#python中sklearn库的pca实现" class="headerlink" title="python中sklearn库的pca实现"></a><strong>python中sklearn库的pca实现</strong></h2><p><img src="http://p6ux47i4n.bkt.clouddn.com/pca.png" alt="pca"></p>
-
+        
+          <a class="article-more-a" href="/2018/04/05/PCA数据降维/#more">more >></a>
+        
       
 
       
@@ -625,6 +615,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">域名</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">PCA</a>
               </li>
              
@@ -633,19 +627,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">Hexo</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">清明</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">随笔</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">域名</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Hexo</a>
               </li>
             
             <div class="clearfix"></div>
