@@ -6,19 +6,36 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://zhenfenghan.github.io">
-  <title>Will的博客</title>
+  <title>分类性能度量指标--ROC、AUC | Will的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="此为博客一枚。">
-<meta name="keywords" content="产品,前端,html5,Python,极客,开源,IT网站,用户体验">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Will的博客">
-<meta property="og:url" content="https://zhenfenghan.github.io/index.html">
+  <meta name="description" content="在分类任务中，人们总是喜欢基于错误率来衡量分类器任务的成功程度。错误率指的是在所有测试样例中错分的样例比例。实际上，这样的度量错误掩盖了样例如何被分错的事实。在机器学习中，有一个普遍适用的称为混淆矩阵(confusion matrix)的工具，它可以帮助人们更好地了解分类中的错误。 比如有这样一个在房子周围可能发现的动物类型的预测，这个预测的三类问题的混淆矩阵如下表所示：  一个三类问题的混淆矩阵">
+<meta name="keywords" content="ROC,AUC,机器学习">
+<meta property="og:type" content="article">
+<meta property="og:title" content="分类性能度量指标--ROC、AUC">
+<meta property="og:url" content="https://zhenfenghan.github.io/2018/05/04/ROC,AUC/index.html">
 <meta property="og:site_name" content="Will的博客">
-<meta property="og:description" content="此为博客一枚。">
+<meta property="og:description" content="在分类任务中，人们总是喜欢基于错误率来衡量分类器任务的成功程度。错误率指的是在所有测试样例中错分的样例比例。实际上，这样的度量错误掩盖了样例如何被分错的事实。在机器学习中，有一个普遍适用的称为混淆矩阵(confusion matrix)的工具，它可以帮助人们更好地了解分类中的错误。 比如有这样一个在房子周围可能发现的动物类型的预测，这个预测的三类问题的混淆矩阵如下表所示：  一个三类问题的混淆矩阵">
 <meta property="og:locale" content="default">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/145616-dcd144da21bdc9b9.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/403">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/145616-4bb34ffdcf31bdc1.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/700">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/145616-0a7a7fd1ff77dcd9.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/700">
+<meta property="og:image" content="http://latex.codecogs.com/png.latex?Precision=%5Cfrac%7BTP%7D%7BTP+FP%7D">
+<meta property="og:image" content="http://latex.codecogs.com/png.latex?Sensitivity=Recall=TPR=%5Cfrac%7BTP%7D%7BTP+FN%7D">
+<meta property="og:image" content="http://latex.codecogs.com/png.latex?Specificity=TNR=%5Cfrac%7BTN%7D%7BFP+TN%7D">
+<meta property="og:image" content="http://latex.codecogs.com/png.latex?FNR=%5Cfrac%7BFN%7D%7BTP+FN%7D">
+<meta property="og:image" content="http://latex.codecogs.com/png.latex?FPR=%5Cfrac%7BFP%7D%7BFP+TN%7D">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/145616-651daa43e80f4c8f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/500">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/145616-ce8221a29d9c01ef.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/700">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/145616-4d27c75e229c1f84.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/361">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/145616-ca9d12fa24fe2842.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/700">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/145616-2063bb79c3684a8a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/632">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/145616-e04823375fb30749.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/568">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/145616-a55d1493f5f26d5c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/624">
+<meta property="og:updated_time" content="2018-05-04T12:32:50.814Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Will的博客">
-<meta name="twitter:description" content="此为博客一枚。">
+<meta name="twitter:title" content="分类性能度量指标--ROC、AUC">
+<meta name="twitter:description" content="在分类任务中，人们总是喜欢基于错误率来衡量分类器任务的成功程度。错误率指的是在所有测试样例中错分的样例比例。实际上，这样的度量错误掩盖了样例如何被分错的事实。在机器学习中，有一个普遍适用的称为混淆矩阵(confusion matrix)的工具，它可以帮助人们更好地了解分类中的错误。 比如有这样一个在房子周围可能发现的动物类型的预测，这个预测的三类问题的混淆矩阵如下表所示：  一个三类问题的混淆矩阵">
+<meta name="twitter:image" content="https://upload-images.jianshu.io/upload_images/145616-dcd144da21bdc9b9.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/403">
   
   
     <link rel="icon" href="/uploads/wordpress-icon.png">
@@ -169,16 +186,14 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-    <article id="post-ROC,AUC" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+            <article id="post-ROC,AUC" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/05/04/ROC,AUC/">分类性能度量指标--ROC、AUC</a>
+    <h1 class="article-title" itemprop="name">
+      分类性能度量指标--ROC、AUC
     </h1>
   
 
@@ -187,6 +202,10 @@
   	<time datetime="2018-05-04T01:01:11.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-04</time>
 </a>
         
+		
+		<span class="archive-article-date">
+			阅读量 <span id="busuanzi_value_page_pv"></span>
+		</span>
 		
       </header>
     
@@ -302,6 +321,37 @@
       
 
       
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/uploads/alipay.png">
+                      <span class="reward-type">支付宝</span>
+                    </div>
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/uploads/wechatpay.png">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
     </div>
     <div class="article-info article-info-index">
       
@@ -328,16 +378,75 @@
       
 
       
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/05/04/ROC,AUC/">展开全文 >></a>
-        </p>
-      
 
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=https://zhenfenghan.github.io/2018/05/04/ROC,AUC/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
       
       <div class="clearfix"></div>
     </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
+  
+  
+    <a href="/2018/04/23/t-SNE算法/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">t-SNE（t-分布随机邻域嵌入）算法</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
 
 <aside class="wrap-side-operation">
     <div class="mod-side-operation">
@@ -352,641 +461,45 @@
         </div>
         
         
-    </div>
-</aside>
-
-
-
-
-
-
-  
-    <article id="post-t-SNE算法" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/04/23/t-SNE算法/">t-SNE（t-分布随机邻域嵌入）算法</a>
-    </h1>
-  
-
-        
-        <a href="/2018/04/23/t-SNE算法/" class="archive-article-date">
-  	<time datetime="2018-04-23T01:01:11.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-04-23</time>
-</a>
-        
-		
-      </header>
-    
-	
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><strong>t-SNE(t-distributed stochastic neighbor embedding) </strong> 是用于<strong>降维</strong>的一种机器学习算法，是由 Laurens van der Maaten 和 Geoffrey Hinton在08年提出来。此外，t-SNE 是一种非线性降维算法，非常适用于高维数据降维到2维或者3维，进行可视化。</p>
-<p>t-SNE是由SNE(Stochastic Neighbor Embedding, SNE; Hinton and Roweis, 2002)发展而来。我们先介绍SNE的基本原理，之后再扩展到t-SNE。最后再看一下t-SNE的实现以及一些优化。</p>
-<h3 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h3><ul>
-<li><a href="file:///D:/Program%20Files/HexoEditor/resources/app.asar/views/main/index.html#1sne" target="_blank" rel="noopener">1.SNE</a><ul>
-<li><a href="file:///D:/Program%20Files/HexoEditor/resources/app.asar/views/main/index.html#11基本原理" target="_blank" rel="noopener">1.1基本原理</a></li>
-<li><a href="file:///D:/Program%20Files/HexoEditor/resources/app.asar/views/main/index.html#12-sne原理推导" target="_blank" rel="noopener">1.2 SNE原理推导</a></li>
-</ul>
-</li>
-<li><a href="file:///D:/Program%20Files/HexoEditor/resources/app.asar/views/main/index.html#2t-sne" target="_blank" rel="noopener">2.t-SNE</a><ul>
-<li><a href="file:///D:/Program%20Files/HexoEditor/resources/app.asar/views/main/index.html#21-symmetric-sne" target="_blank" rel="noopener">2.1 Symmetric SNE</a></li>
-<li><a href="file:///D:/Program%20Files/HexoEditor/resources/app.asar/views/main/index.html#22-crowding问题" target="_blank" rel="noopener">2.2 Crowding问题</a></li>
-<li><a href="file:///D:/Program%20Files/HexoEditor/resources/app.asar/views/main/index.html#23-t-sne" target="_blank" rel="noopener">2.3 t-SNE</a></li>
-<li><a href="file:///D:/Program%20Files/HexoEditor/resources/app.asar/views/main/index.html#24-算法过程" target="_blank" rel="noopener">2.4 算法过程</a></li>
-<li><a href="file:///D:/Program%20Files/HexoEditor/resources/app.asar/views/main/index.html#25-不足" target="_blank" rel="noopener">2.5 不足</a></li>
-</ul>
-</li>
-<li><a href="file:///D:/Program%20Files/HexoEditor/resources/app.asar/views/main/index.html#3变种" target="_blank" rel="noopener">3.变种</a></li>
-<li><a href="file:///D:/Program%20Files/HexoEditor/resources/app.asar/views/main/index.html#4参考文档" target="_blank" rel="noopener">4.参考文档</a></li>
-<li><a href="file:///D:/Program%20Files/HexoEditor/resources/app.asar/views/main/index.html#5-代码" target="_blank" rel="noopener">5. 代码</a></li>
-</ul>
-        
-          <a class="article-more-a" href="/2018/04/23/t-SNE算法/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">机器学习</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">t-SNE</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">降维</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/04/23/t-SNE算法/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#一、医学图像识别二分类问题"><span class="toc-number">1.</span> <span class="toc-text">一、医学图像识别二分类问题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#二、ROC曲线"><span class="toc-number">2.</span> <span class="toc-text">二、ROC曲线</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#三、如何画ROC曲线"><span class="toc-number">3.</span> <span class="toc-text">三、如何画ROC曲线</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#四、AUC"><span class="toc-number">4.</span> <span class="toc-text">四、AUC</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#AUC值的计算"><span class="toc-number">4.1.</span> <span class="toc-text">AUC值的计算</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#AUC意味着什么"><span class="toc-number">4.2.</span> <span class="toc-text">AUC意味着什么</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#为什么使用ROC曲线"><span class="toc-number">4.3.</span> <span class="toc-text">为什么使用ROC曲线</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Reference"><span class="toc-number">4.4.</span> <span class="toc-text">Reference</span></a></li></ol></li></ol>
+                    </div>
+                </span>
             </div>
         </div>
         
-        
     </div>
 </aside>
 
 
 
-
-
-
-  
-    <article id="post-pmcaff报告" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/04/19/pmcaff报告/">PMCAFF 2018 第二期产品学徒</a>
-    </h1>
-  
-
-        
-        <a href="/2018/04/19/pmcaff报告/" class="archive-article-date">
-  	<time datetime="2018-04-19T01:01:11.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-04-19</time>
-</a>
-        
-		
-      </header>
-    
-	
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><strong>PMCAFF 2018 第二期产品学徒</strong>  </p>
-<h3 id="网易公开课产品体验报告"><a href="#网易公开课产品体验报告" class="headerlink" title="网易公开课产品体验报告"></a>网易公开课产品体验报告</h3><p><em>Slogan：让分享知识成为习惯</em></p>
-<p>报告链接：<a href="https://www.pmcaff.com/discuss/answer/1179912791644224" target="_blank" rel="noopener">https://www.pmcaff.com/discuss/answer/1179912791644224</a>  </p>
-<h3 id="超级课程表产品体验报告"><a href="#超级课程表产品体验报告" class="headerlink" title="超级课程表产品体验报告"></a>超级课程表产品体验报告</h3><p><em>Slogan：大学生必备App</em>    </p>
-<p>报告链接：<a href="https://www.pmcaff.com/discuss/answer/1182835810293824" target="_blank" rel="noopener">https://www.pmcaff.com/discuss/answer/1182835810293824</a>  </p>
-<h3 id="网易云课堂产品体验报告"><a href="#网易云课堂产品体验报告" class="headerlink" title="网易云课堂产品体验报告"></a>网易云课堂产品体验报告</h3><p><em>Slogan：知识与技能学习平台</em><br></p>
-        
-          <a class="article-more-a" href="/2018/04/19/pmcaff报告/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">PMCAFF</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">产品</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/04/19/pmcaff报告/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-
-
-  
-    <article id="post-AI黑箱" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/04/15/AI黑箱/">AI黑箱：用AI解释AI？</a>
-    </h1>
-  
-
-        
-        <a href="/2018/04/15/AI黑箱/" class="archive-article-date">
-  	<time datetime="2018-04-15T02:01:11.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-04-15</time>
-</a>
-        
-		
-      </header>
-    
-	
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><em>概要：AI算法对人类生活的影响越来越大，但它们内部的运作往往是不透明的，人们对这种技术的工作方式也愈加感到担忧。</em></p>
-<div align="center"><br><img src="http://p6ux47i4n.bkt.clouddn.com/ai.jpg" alt="ai.jpg"><br></div><br>AI算法对人类生活的影响越来越大，但它们内部的运作往往是不透明的，人们对这种技术的工作方式也愈加感到担忧。MIT科技评论曾经发表一篇题为“人工智能中的黑暗秘密”的文章，警告说：“没有人真正知道先进的机器学习算法是怎样工作的，而这恐将成为一大隐忧。”由于这种不确定性和缺乏问责制，纽约大学AI Now Institute的一份报告建议负责刑事司法、医疗保健、社会福利和教育的公共机构不应该使用AI技术。<br>
-        
-          <a class="article-more-a" href="/2018/04/15/AI黑箱/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">AI</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">黑箱</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/04/15/AI黑箱/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-
-
-  
-    <article id="post-信息茧房" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/04/10/信息茧房/">信息茧房</a>
-    </h1>
-  
-
-        
-        <a href="/2018/04/10/信息茧房/" class="archive-article-date">
-  	<time datetime="2018-04-10T06:01:11.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-04-10</time>
-</a>
-        
-		
-      </header>
-    
-	
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="信息流"><a href="#信息流" class="headerlink" title="信息流"></a>信息流</h3><p><div align="center"><br><img src="http://p6ux47i4n.bkt.clouddn.com/feed.jpg/600" alt="Feed.jpg"><br></div><br>信息流充斥在我们生活中的每一个角落，如同河流一样哺育着每一个人。我们阅读的每一条新闻、看的每一段视频，一切通过信息流出现在我们眼前的东西，多多少少都受到了智能推荐的驱动。<br>　<br></p>
-        
-          <a class="article-more-a" href="/2018/04/10/信息茧房/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">推荐系统</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/04/10/信息茧房/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-
-
-  
-    <article id="post-PCA数据降维" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/04/09/PCA数据降维/">PCA数据降维</a>
-    </h1>
-  
-
-        
-        <a href="/2018/04/09/PCA数据降维/" class="archive-article-date">
-  	<time datetime="2018-04-09T14:01:11.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-04-09</time>
-</a>
-        
-		
-      </header>
-    
-	
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="降维的作用"><a href="#降维的作用" class="headerlink" title="降维的作用"></a><strong>降维的作用</strong></h2><ul>
-<li>数据在低维下更容易处理、更容易使用；</li>
-<li>相关特征，特别是重要特征更能在数据中明确的显示出来；如果只有两维或者三维的话，更便于可视化展示；</li>
-<li>去除数据噪声</li>
-<li>降低算法开销</li>
-</ul>
-        
-          <a class="article-more-a" href="/2018/04/09/PCA数据降维/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">PCA</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/04/09/PCA数据降维/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-
-
-  
-    <article id="post-清明" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/04/05/清明/">梨花风起正清明</a>
-    </h1>
-  
-
-        
-        <a href="/2018/04/05/清明/" class="archive-article-date">
-  	<time datetime="2018-04-05T14:01:11.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-04-05</time>
-</a>
-        
-		
-      </header>
-    
-	
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="一朝春醒-万物清明"><a href="#一朝春醒-万物清明" class="headerlink" title="一朝春醒 万物清明"></a>一朝春醒 万物清明</h2><div align="center"><br><iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86" src="//music.163.com/outchain/player?type=2&id=139377&auto=0&height=66"></iframe><br></div> 
-
-
-<div align="center"><br><a href="https://imgchr.com/i/CiU5uR" target="_blank" rel="noopener"><img src="https://s1.ax1x.com/2018/04/09/CiU5uR.jpg" alt="CiU5uR.jpg"></a><br></div>   
-
-<p><strong><em>“万物生长此时，皆清洁明净。故谓之清明。”</em></strong><br>在我国，很少有一个节日，像清明这样意蕴深厚而含混：风清景明，慎终追远，这是一个悲怆的日子；放歌踏青，追逐春天，这又是一个轻盈的日子。<strong>清明是唯一一个既是节气又是节日的日子。</strong>  </p>
-<ul>
-<li>为测试博客，特此附上有关清明的诗词。</li></ul>
-        
-          <a class="article-more-a" href="/2018/04/05/清明/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">清明</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">随笔</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/04/05/清明/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-
-
-  
-    <article id="post-Will-s-first-blog" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/04/04/Will-s-first-blog/">Will&#39;s First Blog</a>
-    </h1>
-  
-
-        
-        <a href="/2018/04/04/Will-s-first-blog/" class="archive-article-date">
-  	<time datetime="2018-04-04T11:18:47.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-04-04</time>
-</a>
-        
-		
-      </header>
-    
-	
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>这是一篇测试文章，欢迎关注作者博客: <a href="http://willhan.xyz/" target="_blank" rel="noopener">http://willhan.xyz/</a>  或  <a href="https://zhenfenghan.github.io/">https://zhenfenghan.github.io/</a>  <strong>Thank you!</strong> ^_^<br></p>
-        
-          <a class="article-more-a" href="/2018/04/04/Will-s-first-blog/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">域名</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/04/04/Will-s-first-blog/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-
-
   
   
-    <nav id="page-nav">
-      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
-    </nav>
   
+
+  
+  <div id="SOHUCS" sid="ROC,AUC" ></div> 
+<script charset="utf-8" type="text/javascript" src="//changyan.sohu.com/upload/changyan.js" ></script>
+<script type="text/javascript">
+    window.changyan.api.config({
+        appid: "cyty90fPo",
+        conf: "f54a9b68a8029d0435eb8fe2dfefe763"
+    });
+</script>
+</script>
+  
+
+  
+
+  
+
+
 
 
           </div>
@@ -1017,8 +530,8 @@
     <script>
 	var yiliaConfig = {
 		mathjax: true,
-		isHome: true,
-		isPost: false,
+		isHome: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
 		isCategory: false,
