@@ -31,7 +31,7 @@
 <meta property="og:image" content="https://upload-images.jianshu.io/upload_images/145616-2063bb79c3684a8a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/632">
 <meta property="og:image" content="https://upload-images.jianshu.io/upload_images/145616-e04823375fb30749.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/568">
 <meta property="og:image" content="https://upload-images.jianshu.io/upload_images/145616-a55d1493f5f26d5c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/624">
-<meta property="og:updated_time" content="2018-05-04T12:32:50.814Z">
+<meta property="og:updated_time" content="2018-05-04T12:39:54.396Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="分类性能度量指标--ROC、AUC">
 <meta name="twitter:description" content="在分类任务中，人们总是喜欢基于错误率来衡量分类器任务的成功程度。错误率指的是在所有测试样例中错分的样例比例。实际上，这样的度量错误掩盖了样例如何被分错的事实。在机器学习中，有一个普遍适用的称为混淆矩阵(confusion matrix)的工具，它可以帮助人们更好地了解分类中的错误。 比如有这样一个在房子周围可能发现的动物类型的预测，这个预测的三类问题的混淆矩阵如下表所示：  一个三类问题的混淆矩阵">
@@ -218,7 +218,7 @@
 <p>一个三类问题的混淆矩阵</p>
 <p>利用混淆矩阵可以充分理解分类中的错误了。如果混淆矩阵中的非对角线元素均为0，就会得到一个近乎完美的分类器。</p>
 <p>在接下来的讨论中，将以经典的二分类问题为例，对于多分类类比推断。</p>
-<p>二分类问题在机器学习中是一个很常见的问题，经常会用到。<a href="https://link.jianshu.com/?t=https://en.wikipedia.org/wiki/Receiver_operating_characteristic" target="_blank" rel="noopener">ROC</a> (Receiver Operating Characteristic) 曲线和 <a href="https://link.jianshu.com/?t=https://en.wikipedia.org/wiki/Receiver_operating_characteristic#Area_under_the_curve" target="_blank" rel="noopener">AUC</a> (Area Under the Curve) 值常被用来评价一个二值分类器 (<a href="https://link.jianshu.com/?t=https://en.wikipedia.org/wiki/Binary_classification" target="_blank" rel="noopener">binary classifier</a>) 的优劣。之前做医学图像计算机辅助肺结节检测时，在评定模型预测结果时，就用到了ROC和AUC，这里简单介绍一下它们的特点，以及更为深入地，讨论如何作出ROC曲线图和计算AUC值。</p>
+<p>二分类问题在机器学习中是一个很常见的问题，经常会用到。<a href="https://link.jianshu.com/?t=https://en.wikipedia.org/wiki/Receiver_operating_characteristic" target="_blank" rel="noopener">ROC</a> (Receiver Operating Characteristic) 曲线和 <a href="https://link.jianshu.com/?t=https://en.wikipedia.org/wiki/Receiver_operating_characteristic#Area_under_the_curve" target="_blank" rel="noopener">AUC</a> (Area Under the Curve) 值常被用来评价一个二值分类器 (<a href="https://link.jianshu.com/?t=https://en.wikipedia.org/wiki/Binary_classification" target="_blank" rel="noopener">binary classifier</a>) 的优劣。之前做医学图像计算机辅助肺结节检测时，在评定模型预测结果时，就用到了ROC和AUC，这里简单介绍一下它们的特点，以及更为深入地，讨论如何作出ROC曲线图和计算AUC值。<br><a id="more"></a></p>
 <h2 id="一、医学图像识别二分类问题"><a href="#一、医学图像识别二分类问题" class="headerlink" title="一、医学图像识别二分类问题"></a>一、医学图像识别二分类问题</h2><p>针对一个二分类问题，我们将实例分成<strong>正类</strong>(positive)和<strong>负类</strong>(negative)两种。</p>
 <p>例如：在肺结节计算机辅助识别这一问题上，一幅肺部CT图像中有肺结节被认为是<strong>阳性</strong>(positive)，没有肺结节被认为是<strong>阴性</strong>(negative)。对于部分有肺结节的示意图如下：</p>
 <p><img src="https://upload-images.jianshu.io/upload_images/145616-4bb34ffdcf31bdc1.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/700" alt=""></p>
@@ -622,15 +622,11 @@ MathJax.Hub.Queue(function() {
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">ROC</a>
+                <a href="javascript:void(0)" class="js-tag color3">AI</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">AUC</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">机器学习</a>
+                <a href="javascript:void(0)" class="js-tag color3">黑箱</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -642,19 +638,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">域名</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">t-SNE</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">降维</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">Hexo</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">域名</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -670,11 +658,23 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">AI</a>
+                <a href="javascript:void(0)" class="js-tag color4">ROC</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">黑箱</a>
+                <a href="javascript:void(0)" class="js-tag color4">AUC</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">机器学习</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">t-SNE</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">降维</a>
               </li>
              
               <li class="article-tag-list-item">
