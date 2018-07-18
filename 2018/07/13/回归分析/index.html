@@ -27,7 +27,7 @@
 <meta property="og:image" content="http://img.ptcms.csdn.net/article/201508/19/55d3f6f3add20.jpg">
 <meta property="og:image" content="http://img.ptcms.csdn.net/article/201508/19/55d3f7141b25b.jpg">
 <meta property="og:image" content="http://img.ptcms.csdn.net/article/201508/19/55d3f736bb158.jpg">
-<meta property="og:updated_time" content="2018-07-15T09:18:54.567Z">
+<meta property="og:updated_time" content="2018-07-18T02:42:30.985Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="回归分析--预测神器">
 <meta name="twitter:description" content="回归分析 : 是一种预测性的建模技术,使用曲线拟合数据点，最终获取到数据点的距离差异最小的曲线  1回归主要三个度量：自变量的个数，因变量的类型以及回归线的形状 什么是回归分析？回归分析是一种预测性的建模技术，它研究的是因变量（目标）和自变量（预测器）之间的关系。这种技术通常用于预测分析，时间序列模型以及发现变量之间的因果关系。例如，司机的鲁莽驾驶与道路交通事故数量之间的关系，最好的研究方法就是">
@@ -322,6 +322,22 @@
 <li>选择变量的数目没有限制；</li>
 <li>它可以承受双重收缩。   </li>
 </ul>
+<h3 id="拓展：损失函数和正则化"><a href="#拓展：损失函数和正则化" class="headerlink" title="拓展：损失函数和正则化"></a>拓展：损失函数和正则化</h3><p><strong>损失函数（loss function）</strong>是用来估量你模型的预测值f(x)与真实值Y的不一致程度，它是一个非负实值函数,通常使用L(Y, f(x))来表示，损失函数越小，模型的鲁棒性就越好。损失函数是<strong>经验风险函数</strong>的核心部分，也是<strong>结构风险函数</strong>重要组成部分。模型的结构风险函数包括了经验风险项和正则项，通常可以表示成如下式子：</p>
+<p>\theta^* = \arg \min_\theta \frac{1}{N}{}\sum_{i=1}^{N} L(y_i, f(x_i; \theta)) + \lambda\ \Phi(\theta)</p>
+<p>其中，前面的均值函数表示的是经验风险函数，L代表的是损失函数，后面的Φ是正则化项（regularizer）或者叫惩罚项（penalty term），它可以是L1，也可以是L2，或者其他的正则函数。整个式子表示的意思是<strong>找到使目标函数最小时的θ值</strong>。</p>
+<p><strong>L1正则化和L2正则化的说明如下：</strong></p>
+<ul>
+<li><p>L1正则化是指权值向量ww中各个元素的<strong><em>绝对值之和</em></strong>，通常表示为||w||1</p>
+</li>
+<li><p>L2正则化是指权值向量ww中各个元素的<strong><em>平方和然后再求平方根</em></strong>（可以看到Ridge回归的L2正则化项有平方符号），通常表示为||w||2</p>
+</li>
+</ul>
+<p>一般都会在正则化项之前添加一个系数，Python中用αα表示，一些文章也用λλ表示。<strong>这个系数需要用户指定。</strong></p>
+<p>那添加L1和L2正则化有什么用？<strong>下面是L1正则化和L2正则化的作用</strong>，这些表述可以在很多文章中找到。</p>
+<ul>
+<li>L1正则化可以产生稀疏权值矩阵，即产生一个稀疏模型，可以用于特征选择</li>
+<li>L2正则化可以防止模型过拟合（overfitting）；一定程度上，L1也可以防止过拟合</li>
+</ul>
 <h2 id="如何正确选择回归模型？"><a href="#如何正确选择回归模型？" class="headerlink" title="如何正确选择回归模型？"></a><strong>如何正确选择回归模型？</strong></h2><p><strong>当你只知道一个或两个技术时，生活往往很简单。</strong>我知道的一个培训机构告诉他们的学生，如果结果是连续的，就使用线性回归。如果是二元的，就使用逻辑回归！然而，在我们的处理中，可选择的越多，选择正确的一个就越难。类似的情况下也发生在回归模型中。</p>
 <p>在多类回归模型中，基于自变量和因变量的类型，数据的维数以及数据的其它基本特征的情况下，选择最合适的技术非常重要。以下是你要选择正确的回归模型的关键因素：</p>
 <blockquote>
@@ -494,7 +510,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#什么是回归分析？"><span class="toc-number">1.</span> <span class="toc-text">什么是回归分析？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#我们为什么使用回归分析？"><span class="toc-number">2.</span> <span class="toc-text">我们为什么使用回归分析？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#我们有多少种回归技术？"><span class="toc-number">3.</span> <span class="toc-text">我们有多少种回归技术？</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#线性回归-（Linear-Regression）"><span class="toc-number">3.1.</span> <span class="toc-text">线性回归 （Linear Regression）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#逻辑回归-（Logistic-Regression）"><span class="toc-number">3.2.</span> <span class="toc-text">逻辑回归 （Logistic Regression）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#多项式回归-（Polynomial-Regression）"><span class="toc-number">3.3.</span> <span class="toc-text">多项式回归 （Polynomial Regression）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#逐步回归-（Stepwise-Regression）"><span class="toc-number">3.4.</span> <span class="toc-text">逐步回归 （Stepwise Regression）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#岭回归-（Ridge-Regression）"><span class="toc-number">3.5.</span> <span class="toc-text">岭回归 （Ridge Regression）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#套索回归-（Lasso-Regression）"><span class="toc-number">3.6.</span> <span class="toc-text">套索回归 （Lasso Regression）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#弹性网络回归（ElasticNet-Regression）"><span class="toc-number">3.7.</span> <span class="toc-text">弹性网络回归（ElasticNet Regression）</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#如何正确选择回归模型？"><span class="toc-number">4.</span> <span class="toc-text">如何正确选择回归模型？</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#什么是回归分析？"><span class="toc-number">1.</span> <span class="toc-text">什么是回归分析？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#我们为什么使用回归分析？"><span class="toc-number">2.</span> <span class="toc-text">我们为什么使用回归分析？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#我们有多少种回归技术？"><span class="toc-number">3.</span> <span class="toc-text">我们有多少种回归技术？</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#线性回归-（Linear-Regression）"><span class="toc-number">3.1.</span> <span class="toc-text">线性回归 （Linear Regression）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#逻辑回归-（Logistic-Regression）"><span class="toc-number">3.2.</span> <span class="toc-text">逻辑回归 （Logistic Regression）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#多项式回归-（Polynomial-Regression）"><span class="toc-number">3.3.</span> <span class="toc-text">多项式回归 （Polynomial Regression）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#逐步回归-（Stepwise-Regression）"><span class="toc-number">3.4.</span> <span class="toc-text">逐步回归 （Stepwise Regression）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#岭回归-（Ridge-Regression）"><span class="toc-number">3.5.</span> <span class="toc-text">岭回归 （Ridge Regression）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#套索回归-（Lasso-Regression）"><span class="toc-number">3.6.</span> <span class="toc-text">套索回归 （Lasso Regression）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#弹性网络回归（ElasticNet-Regression）"><span class="toc-number">3.7.</span> <span class="toc-text">弹性网络回归（ElasticNet Regression）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#拓展：损失函数和正则化"><span class="toc-number">3.8.</span> <span class="toc-text">拓展：损失函数和正则化</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#如何正确选择回归模型？"><span class="toc-number">4.</span> <span class="toc-text">如何正确选择回归模型？</span></a></li></ol>
                     </div>
                 </span>
             </div>
@@ -662,14 +678,6 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">PCA</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Python</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">ROC</a>
               </li>
              
@@ -682,19 +690,19 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">域名</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">Hexo</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">t-SNE</a>
+                <a href="javascript:void(0)" class="js-tag color4">PCA</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">降维</a>
+                <a href="javascript:void(0)" class="js-tag color2">Python</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">域名</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -710,7 +718,35 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">医疗健康</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">AI医疗</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">移动医疗</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">推荐系统</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">数据科学</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">回归分析 - 预测</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">t-SNE</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">降维</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -727,26 +763,6 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">清明</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">医疗健康</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">AI医疗</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">移动医疗</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">数据科学</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">回归分析 - 预测</a>
               </li>
             
             <div class="clearfix"></div>
