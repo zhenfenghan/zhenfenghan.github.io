@@ -27,7 +27,7 @@
 <meta property="og:image" content="http://img.ptcms.csdn.net/article/201508/19/55d3f6f3add20.jpg">
 <meta property="og:image" content="http://img.ptcms.csdn.net/article/201508/19/55d3f7141b25b.jpg">
 <meta property="og:image" content="http://img.ptcms.csdn.net/article/201508/19/55d3f736bb158.jpg">
-<meta property="og:updated_time" content="2018-07-18T02:42:30.985Z">
+<meta property="og:updated_time" content="2018-07-18T02:51:15.241Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="回归分析--预测神器">
 <meta name="twitter:description" content="回归分析 : 是一种预测性的建模技术,使用曲线拟合数据点，最终获取到数据点的距离差异最小的曲线  1回归主要三个度量：自变量的个数，因变量的类型以及回归线的形状 什么是回归分析？回归分析是一种预测性的建模技术，它研究的是因变量（目标）和自变量（预测器）之间的关系。这种技术通常用于预测分析，时间序列模型以及发现变量之间的因果关系。例如，司机的鲁莽驾驶与道路交通事故数量之间的关系，最好的研究方法就是">
@@ -338,6 +338,13 @@
 <li>L1正则化可以产生稀疏权值矩阵，即产生一个稀疏模型，可以用于特征选择</li>
 <li>L2正则化可以防止模型过拟合（overfitting）；一定程度上，L1也可以防止过拟合</li>
 </ul>
+<h4 id="稀疏模型与特征选择"><a href="#稀疏模型与特征选择" class="headerlink" title="稀疏模型与特征选择"></a>稀疏模型与特征选择</h4><p>上面提到L1正则化有助于生成一个稀疏权值矩阵，进而可以用于特征选择。<strong>为什么要生成一个稀疏矩阵？</strong></p>
+<p>稀疏矩阵指的是很多元素为0，只有少数元素是非零值的矩阵，即得到的线性回归模型的大部分系数都是0. 通常机器学习中特征数量很多，例如文本处理时，如果将一个词组（term）作为一个特征，那么特征数量会达到上万个（bigram）。在预测或分类时，那么多特征显然难以选择，但是如果代入这些特征得到的模型是一个稀疏模型，表示只有少数特征对这个模型有贡献，绝大部分特征是没有贡献的，或者贡献微小（因为它们前面的系数是0或者是很小的值，即使去掉对模型也没有什么影响），此时我们就可以<strong>只关注系数是非零值的特征</strong>。这就是稀疏模型与特征选择的关系。</p>
+<p><strong>Reference</strong></p>
+<p>过拟合的解释：<br><a href="https://hit-scir.gitbooks.io/neural-networks-and-deep-learning-zh_cn/content/chap3/c3s5ss2.html" target="_blank" rel="noopener">https://hit-scir.gitbooks.io/neural-networks-and-deep-learning-zh_cn/content/chap3/c3s5ss2.html</a></p>
+<p>正则化的解释：<br><a href="https://hit-scir.gitbooks.io/neural-networks-and-deep-learning-zh_cn/content/chap3/c3s5ss1.html" target="_blank" rel="noopener">https://hit-scir.gitbooks.io/neural-networks-and-deep-learning-zh_cn/content/chap3/c3s5ss1.html</a></p>
+<p>正则化的解释：<br><a href="http://blog.csdn.net/u012162613/article/details/44261657" target="_blank" rel="noopener">http://blog.csdn.net/u012162613/article/details/44261657</a></p>
+<p>正则化的数学解释：<br><a href="http://blog.csdn.net/zouxy09/article/details/24971995" target="_blank" rel="noopener">http://blog.csdn.net/zouxy09/article/details/24971995</a></p>
 <h2 id="如何正确选择回归模型？"><a href="#如何正确选择回归模型？" class="headerlink" title="如何正确选择回归模型？"></a><strong>如何正确选择回归模型？</strong></h2><p><strong>当你只知道一个或两个技术时，生活往往很简单。</strong>我知道的一个培训机构告诉他们的学生，如果结果是连续的，就使用线性回归。如果是二元的，就使用逻辑回归！然而，在我们的处理中，可选择的越多，选择正确的一个就越难。类似的情况下也发生在回归模型中。</p>
 <p>在多类回归模型中，基于自变量和因变量的类型，数据的维数以及数据的其它基本特征的情况下，选择最合适的技术非常重要。以下是你要选择正确的回归模型的关键因素：</p>
 <blockquote>
@@ -510,7 +517,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#什么是回归分析？"><span class="toc-number">1.</span> <span class="toc-text">什么是回归分析？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#我们为什么使用回归分析？"><span class="toc-number">2.</span> <span class="toc-text">我们为什么使用回归分析？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#我们有多少种回归技术？"><span class="toc-number">3.</span> <span class="toc-text">我们有多少种回归技术？</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#线性回归-（Linear-Regression）"><span class="toc-number">3.1.</span> <span class="toc-text">线性回归 （Linear Regression）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#逻辑回归-（Logistic-Regression）"><span class="toc-number">3.2.</span> <span class="toc-text">逻辑回归 （Logistic Regression）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#多项式回归-（Polynomial-Regression）"><span class="toc-number">3.3.</span> <span class="toc-text">多项式回归 （Polynomial Regression）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#逐步回归-（Stepwise-Regression）"><span class="toc-number">3.4.</span> <span class="toc-text">逐步回归 （Stepwise Regression）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#岭回归-（Ridge-Regression）"><span class="toc-number">3.5.</span> <span class="toc-text">岭回归 （Ridge Regression）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#套索回归-（Lasso-Regression）"><span class="toc-number">3.6.</span> <span class="toc-text">套索回归 （Lasso Regression）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#弹性网络回归（ElasticNet-Regression）"><span class="toc-number">3.7.</span> <span class="toc-text">弹性网络回归（ElasticNet Regression）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#拓展：损失函数和正则化"><span class="toc-number">3.8.</span> <span class="toc-text">拓展：损失函数和正则化</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#如何正确选择回归模型？"><span class="toc-number">4.</span> <span class="toc-text">如何正确选择回归模型？</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#什么是回归分析？"><span class="toc-number">1.</span> <span class="toc-text">什么是回归分析？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#我们为什么使用回归分析？"><span class="toc-number">2.</span> <span class="toc-text">我们为什么使用回归分析？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#我们有多少种回归技术？"><span class="toc-number">3.</span> <span class="toc-text">我们有多少种回归技术？</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#线性回归-（Linear-Regression）"><span class="toc-number">3.1.</span> <span class="toc-text">线性回归 （Linear Regression）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#逻辑回归-（Logistic-Regression）"><span class="toc-number">3.2.</span> <span class="toc-text">逻辑回归 （Logistic Regression）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#多项式回归-（Polynomial-Regression）"><span class="toc-number">3.3.</span> <span class="toc-text">多项式回归 （Polynomial Regression）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#逐步回归-（Stepwise-Regression）"><span class="toc-number">3.4.</span> <span class="toc-text">逐步回归 （Stepwise Regression）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#岭回归-（Ridge-Regression）"><span class="toc-number">3.5.</span> <span class="toc-text">岭回归 （Ridge Regression）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#套索回归-（Lasso-Regression）"><span class="toc-number">3.6.</span> <span class="toc-text">套索回归 （Lasso Regression）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#弹性网络回归（ElasticNet-Regression）"><span class="toc-number">3.7.</span> <span class="toc-text">弹性网络回归（ElasticNet Regression）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#拓展：损失函数和正则化"><span class="toc-number">3.8.</span> <span class="toc-text">拓展：损失函数和正则化</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#稀疏模型与特征选择"><span class="toc-number">3.8.1.</span> <span class="toc-text">稀疏模型与特征选择</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#如何正确选择回归模型？"><span class="toc-number">4.</span> <span class="toc-text">如何正确选择回归模型？</span></a></li></ol>
                     </div>
                 </span>
             </div>
@@ -678,22 +685,6 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">ROC</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">AUC</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">机器学习</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Hexo</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">PCA</a>
               </li>
              
@@ -706,11 +697,51 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">Hexo</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">PMCAFF</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">产品</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">t-SNE</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">降维</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">机器学习</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">ROC</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">AUC</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">推荐系统</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">加德满都</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">旅行</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -730,7 +761,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">推荐系统</a>
+                <a href="javascript:void(0)" class="js-tag color3">清明</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -739,30 +770,6 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">回归分析 - 预测</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">t-SNE</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">降维</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">加德满都</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">旅行</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">清明</a>
               </li>
             
             <div class="clearfix"></div>
